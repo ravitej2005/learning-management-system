@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "527868667064",
+    "project_id": "flutterlms-c2180",
+    "storage_bucket": "flutterlms-c2180.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527868667064:android:c800d5565d20fe2bacc04d",
+        "android_client_info": {
+          "package_name": "com.example.learning_management_system"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_2Ybi5p4TBmkPqDl3oVld6ww-_lBBChw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
