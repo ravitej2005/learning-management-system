@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learning_management_system/components/auth_button.dart';
 import 'package:learning_management_system/pages/signin.dart';
 import 'package:learning_management_system/pages/signup.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LandingPage3 extends StatefulWidget {
   const LandingPage3({super.key});
@@ -19,6 +20,12 @@ class _LandingPage3State extends State<LandingPage3> {
     super.initState();
     signInScreen = SignIn();
     signUpScreen = SignUp();
+    _setFirstLaunch();
+  }
+
+  Future<void> _setFirstLaunch() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isFirstLaunch', false);
   }
 
   @override
@@ -39,11 +46,15 @@ class _LandingPage3State extends State<LandingPage3> {
                     bgcolor: Colors.black,
                     textcolor: Colors.white,
                     onPressed: () {
-                      Navigator.pushReplacement(context, MaterialPageRoute(
-                        builder: (context) {
-                          return signInScreen;
-                        },
-                      ));
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return signInScreen;
+                          },
+                        ),
+                        (route) => false,
+                      );
                     },
                     text: "Sign In",
                   ),
@@ -56,11 +67,15 @@ class _LandingPage3State extends State<LandingPage3> {
                     bgcolor: Colors.white,
                     textcolor: Colors.black,
                     onPressed: () {
-                      Navigator.pushReplacement(context, MaterialPageRoute(
-                        builder: (context) {
-                          return signUpScreen;
-                        },
-                      ));
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return signUpScreen;
+                          },
+                        ),
+                        (route) => false,
+                      );
                     },
                     text: "Sign Up",
                   ),

@@ -6,7 +6,9 @@ import 'package:learning_management_system/components/auth_textfield.dart';
 import 'package:learning_management_system/components/google_auth_button.dart';
 import 'package:learning_management_system/components/snackbar.dart';
 import 'package:learning_management_system/pages/authPage.dart';
+import 'package:learning_management_system/pages/resetPassword.dart';
 import 'package:learning_management_system/pages/signup.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -16,35 +18,74 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  bool loginFailed = false;
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   final email = TextEditingController();
   final password = TextEditingController();
+
+  Future<void> loginWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser == null) {
+        print("User canceled Google sign-in.");
+        return; // Stop execution if user cancels sign-in
+      }
+
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      UserCredential? userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      print(userCredential.user);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   void loginUser(BuildContext context) async {
     bool validateForm = _formkey.currentState!.validate();
     if (validateForm) {
       showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (context) => const Center(
           child: CircularProgressIndicator(),
         ),
       );
       try {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
-            email: email.text, password: password.text);
-        Navigator.pop(context);
+          email: email.text.trim(),
+          password: password.text.trim(),
+        );
+        if (mounted) {
+          Navigator.pop(context);
+        }
         email.clear();
         password.clear();
-        Navigator.pushReplacement(
+
+        Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) {
-            displaySnackBar(context, "Login Successful..!!!", Icons.verified);
-            return AuthPage();
-          }),
+          MaterialPageRoute(
+            builder: (context) {
+              return const AuthPage();
+            },
+          ),
+          (route) => false,
         );
       } on FirebaseAuthException catch (e) {
-        Navigator.pop(context);
+        if (mounted) {
+          Navigator.pop(context);
+        }
         displaySnackBar(context, e.code, Icons.error);
+        print(e);
+        setState(() {
+          loginFailed = true;
+        });
       }
     }
   }
@@ -124,13 +165,43 @@ class _SignInState extends State<SignIn> {
                       },
                       controller: password,
                     ),
+                    loginFailed
+                        ? const SizedBox(
+                            height: 10,
+                          )
+                        : const SizedBox.shrink(),
+                    loginFailed
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) {
+                                      return ResetPassword();
+                                    },
+                                  ));
+                                },
+                                child: const Text(
+                                  "Forgot Password?",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 106, 106, 106),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                            ],
+                          )
+                        : const SizedBox.shrink(),
                     const SizedBox(
                       height: 20,
                     ),
                     AuthButton(
                       bgcolor: Colors.black,
                       textcolor: Colors.white,
-                      onPressed: ()=>loginUser(context),
+                      onPressed: () => loginUser(context),
                       text: "Sign In",
                     ),
                     const SizedBox(
@@ -167,7 +238,10 @@ class _SignInState extends State<SignIn> {
                     ),
                     GoogleAuthButton(
                       text: "Sign In With Google",
-                      onPressed: () {},
+                      onPressed: () {
+                        loginWithGoogle();
+                        print("Google Login");
+                      },
                       bgcolor: Colors.white,
                       textcolor: Colors.black,
                     ),
@@ -195,7 +269,7 @@ class _SignInState extends State<SignIn> {
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(
                               builder: (context) {
-                                return SignUp();
+                                return const SignUp();
                               },
                             ));
                           },

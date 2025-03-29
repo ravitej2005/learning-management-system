@@ -4,9 +4,14 @@ import 'package:learning_management_system/pages/Homepage.dart';
 import 'package:learning_management_system/pages/emailVerifyPage.dart';
 import 'package:learning_management_system/pages/signin.dart';
 
-class AuthPage extends StatelessWidget {
+class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
 
+  @override
+  State<AuthPage> createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -22,7 +27,7 @@ class AuthPage extends StatelessWidget {
             user.sendEmailVerification();
             return EmailVerifyPage(user); // Navigate to email verification page
           }
-          return Homepage(); // User is logged in
+          return Homepage(userId: user!.uid); // User is logged in
         } else {
           return SignIn(); // Show login page by default
         }

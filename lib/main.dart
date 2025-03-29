@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:learning_management_system/pages/landingPage3.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:learning_management_system/pages/authPage.dart';
+import 'package:learning_management_system/pages/landingPage3.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -8,15 +10,20 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MainApp());
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
+  runApp(MainApp(
+    isFirstLaunch: isFirstLaunch,
+  ));
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final bool isFirstLaunch;
+  const MainApp({super.key, required this.isFirstLaunch});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LandingPage3(),
+      home: isFirstLaunch ? LandingPage3() : AuthPage(),
     );
   }
 }

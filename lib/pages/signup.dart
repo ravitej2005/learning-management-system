@@ -147,11 +147,11 @@ class _SignUpState extends State<SignUp> {
                       obscureText: false,
                       labelText: "Full Name",
                       validator: (value) {
-                        if (value!.trim() == "") {
+                        if (value == null || value.trim().isEmpty) {
                           return "*required";
-                        } else if (!RegExp(r'^[a-zA-Z]+$')
+                        } else if (!RegExp(r'^[a-zA-Z]+( [a-zA-Z]+)*$')
                             .hasMatch(value.trim())) {
-                          return 'Name can only contain letters';
+                          return 'Name can only contain letters and spaces';
                         } else {
                           return null;
                         }
