@@ -51,7 +51,7 @@ class _EmailVerifyPageState extends State<EmailVerifyPage> {
 
           // Navigate to AuthPage if the widget is still mounted
           if (mounted) {
-            Navigator.pushReplacement(
+            Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) {
                 displaySnackBar(
@@ -61,6 +61,7 @@ class _EmailVerifyPageState extends State<EmailVerifyPage> {
                 );
                 return const AuthPage();
               }),
+              (route) => false,
             );
           }
         }

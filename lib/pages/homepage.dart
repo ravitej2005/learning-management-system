@@ -1,33 +1,33 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_management_system/components/snackbar.dart';
 
 class Homepage extends StatefulWidget {
-  final String? userId;
-  const Homepage({super.key, required this.userId});
+  final Map<String, dynamic>? userData;
+  const Homepage({super.key, required this.userData});
 
   @override
   State<Homepage> createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
-  Map<String, dynamic>? userData;
   @override
   void initState() {
     super.initState();
-    getDocument();
+    // getDocument();
   }
 
-  Future<void> getDocument() async {
-    var userDoc =
-        await FirebaseFirestore.instance.collection('users').doc(widget.userId!).get();
-    if (userDoc.exists) {
-      setState(() {
-        userData = userDoc.data() as Map<String, dynamic>;
-      });
-    }
-  }
+  // Future<void> getDocument() async {
+  //   var userDoc = await FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(widget.userId!)
+  //       .get();
+  //   if (userDoc.exists) {
+  //     setState(() {
+  //       userData = userDoc.data() as Map<String, dynamic>;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class _HomepageState extends State<Homepage> {
         ],
       ),
       body: Center(
-        child: Text(userData?['fullname'] ?? "Welcome"),
+        child: Text(widget.userData?['fullname'] ?? "Welcome"),
       ),
     );
   }
