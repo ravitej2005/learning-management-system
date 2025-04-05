@@ -55,7 +55,7 @@ class _SignUpState extends State<SignUp> {
 
       if (googleUser == null) {
         setState(() {
-          isLoading = false; 
+          isLoading = false;
         });
         return; // Stop execution if user cancels sign-in
       }
@@ -217,7 +217,7 @@ class _SignUpState extends State<SignUp> {
                   child: Text(
                     "Create an account to begin your Learning Journey",
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 15.5,
                     ),
                   ),
                 ),
@@ -401,6 +401,8 @@ class _SignUpState extends State<SignUp> {
                               child: const Text(
                                 "Sign In Here",
                                 style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  decorationThickness: 2,
                                   fontFamily: 'Poppins',
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,

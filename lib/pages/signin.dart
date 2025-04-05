@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -321,7 +322,7 @@ class _SignInState extends State<SignIn> {
                               "Dont't have an account?",
                               style: TextStyle(
                                 fontFamily: 'Poppins',
-                                fontSize: 16,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black,
                               ),
@@ -339,10 +340,12 @@ class _SignInState extends State<SignIn> {
                                 ));
                               },
                               child: const Text(
-                                "Create Account Here",
+                                "Create Account",
                                 style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  decorationThickness: 2,
                                   fontFamily: 'Poppins',
-                                  fontSize: 16,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black,
                                 ),
