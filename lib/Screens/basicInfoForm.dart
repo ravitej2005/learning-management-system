@@ -6,8 +6,8 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
-import 'package:learning_management_system/components/Button_Widget.dart';
-import 'package:learning_management_system/components/snackbar.dart';
+import 'package:learning_management_system/Widgets/Button_Widget.dart';
+import 'package:learning_management_system/Widgets/snackbar.dart';
 
 class BasicInfoForm extends StatefulWidget {
   final Map<String, dynamic>? userData;

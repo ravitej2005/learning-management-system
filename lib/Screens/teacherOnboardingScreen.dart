@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:learning_management_system/pages/basicInfoForm.dart';
-import 'package:learning_management_system/pages/qualificationAndExperince.dart';
-import 'package:learning_management_system/pages/uploadDocument.dart';
+import 'package:learning_management_system/Screens/basicInfoForm.dart';
+import 'package:learning_management_system/Screens/qualificationAndExperince.dart';
+import 'package:learning_management_system/Screens/uploadDocument.dart';
 
 class TeacherOnboardingScreen extends StatefulWidget {
   final Map<String, dynamic>? userData;

@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:learning_management_system/components/auth_button.dart';
-import 'package:learning_management_system/components/auth_textfield.dart';
-import 'package:learning_management_system/components/snackbar.dart';
-import 'package:learning_management_system/pages/signin.dart';
+import 'package:learning_management_system/Widgets/auth_button.dart';
+import 'package:learning_management_system/Widgets/auth_textfield.dart';
+import 'package:learning_management_system/Widgets/snackbar.dart';
+import 'package:learning_management_system/Screens/signin.dart';
 import 'package:remixicon/remixicon.dart';
 
 class ResetPassword extends StatefulWidget {

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:learning_management_system/components/snackbar.dart';
-import 'package:learning_management_system/pages/authPage.dart';
+import 'package:learning_management_system/Widgets/snackbar.dart';
+import 'package:learning_management_system/Screens/authPage.dart';
 import 'package:lottie/lottie.dart';
 import 'package:remixicon/remixicon.dart';
 

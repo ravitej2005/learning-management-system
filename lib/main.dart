@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:learning_management_system/pages/authPage.dart';
-import 'package:learning_management_system/pages/landingPage3.dart';
+import 'package:learning_management_system/Screens/authPage.dart';
+import 'package:learning_management_system/Screens/landingPage3.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 

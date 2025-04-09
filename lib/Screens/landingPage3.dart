@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:learning_management_system/components/auth_button.dart';
-import 'package:learning_management_system/pages/signin.dart';
-import 'package:learning_management_system/pages/signup.dart';
+import 'package:learning_management_system/Widgets/auth_button.dart';
+import 'package:learning_management_system/Screens/signin.dart';
+import 'package:learning_management_system/Screens/signup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LandingPage3 extends StatefulWidget {

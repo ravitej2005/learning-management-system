@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:learning_management_system/components/snackbar.dart';
-import 'package:learning_management_system/pages/TeacherOnboardingScreen.dart';
+import 'package:learning_management_system/Widgets/snackbar.dart';
+import 'package:learning_management_system/Screens/TeacherOnboardingScreen.dart';
 
 class Homepage extends StatefulWidget {
   final Map<String, dynamic>? userData;
