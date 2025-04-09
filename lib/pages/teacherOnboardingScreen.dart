@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:learning_management_system/pages/basicInfoForm.dart';
+import 'package:learning_management_system/pages/qualificationAndExperince.dart';
+import 'package:learning_management_system/pages/uploadDocument.dart';
 
 class TeacherOnboardingScreen extends StatefulWidget {
   final Map<String, dynamic>? userData;
@@ -64,7 +66,7 @@ class _TeacherOnboardingScreenState extends State<TeacherOnboardingScreen> {
                 ),
                 BasicInfoForm(
                   userData: widget.userData,
-                  formKey: keyList[_currentStep],
+                  formKey: keyList[0],
                 ),
               ],
             ),
@@ -72,15 +74,12 @@ class _TeacherOnboardingScreenState extends State<TeacherOnboardingScreen> {
             state: _currentStep > 0 ? StepState.complete : StepState.indexed,
           ),
           Step(
-            title: Text("Experience & Subjects"),
+            title: Text("Qualifications and Experience"),
             content: Column(
               children: [
-                TextField(
-                    decoration:
-                        InputDecoration(labelText: "Years of Experience")),
-                TextField(
-                    decoration:
-                        InputDecoration(labelText: "Subjects you teach")),
+                Qualificationandexperince(
+                  formKey: keyList[1],
+                )
               ],
             ),
             isActive: _currentStep >= 1,
@@ -89,13 +88,7 @@ class _TeacherOnboardingScreenState extends State<TeacherOnboardingScreen> {
           Step(
             title: Text("Upload Documents"),
             content: Column(
-              children: [
-                Text("Upload your qualifications (PDF, JPG, etc.)"),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text("Upload"),
-                ),
-              ],
+              children: [UploadDocumentsSection(formKey: keyList[2])],
             ),
             isActive: _currentStep >= 2,
             state: _currentStep > 2 ? StepState.complete : StepState.indexed,
